@@ -50,6 +50,8 @@ it 'signup directs user to shipper-compliance index' do
       }
       post '/signup', params
       expect(last_response.location).to include('/signup')
+      expect(page).to have_content("You Must Enter an Email to Continue.")
+
     end
 
     it 'does not let a user sign up without a password' do
@@ -60,6 +62,7 @@ it 'signup directs user to shipper-compliance index' do
       }
       post '/signup', params
       expect(last_response.location).to include('/signup')
+      expect(page).to have_content("You Must Enter an Password to Continue.")
     end
 
     it 'creates a new user and logs them in on valid submission and does not let a logged in user view the signup page' do
@@ -126,6 +129,7 @@ it 'signup directs user to shipper-compliance index' do
     it 'does not load /Companys if user not logged in' do
       get '/Companys'
       expect(last_response.location).to include("/login")
+      expect(page).to have_content("You Must login First.")
     end
 
     it 'does load /Companys if user is logged in' do
@@ -178,6 +182,7 @@ it 'signup directs user to shipper-compliance index' do
       it 'does not let a user view the all companies if not logged in' do
         get '/companies'
         expect(last_response.location).to include("/login")
+        expect(page).to have_content("Please login to view that page.")
       end
     end
   end
@@ -231,6 +236,7 @@ it 'signup directs user to shipper-compliance index' do
         click_button 'submit'
          
         expect(page.current_path).to eq("/companies/new")
+        expect(page).to have_content("That company already exists, please create a new company or comment on an existing company.")
       end
 
 
@@ -250,13 +256,15 @@ it 'signup directs user to shipper-compliance index' do
 
         expect(Company.find_by(:name => "")).to eq(nil)
         expect(page.current_path).to eq("/companies/new")
+        expect(page).to have_content("Please enter a name")
       end
     end
 
     context 'logged out' do
-      it 'does not let user view new Company form if not logged in' do
+      it 'does not let user view new company form if not logged in' do
         get '/companies/new'
         expect(last_response.location).to include("/login")
+        expect(page).to have_content("You must login to view that page.")
       end
     end
   end
@@ -288,6 +296,7 @@ it 'signup directs user to shipper-compliance index' do
         company = Company.create(:name => "Amaramrk", :user_id => user.id)
         get "/companies/#{company.id}"
         expect(last_response.location).to include("/login")
+        expect(page).to have_content("You must login to view that page.")
       end
     end
   end
@@ -321,6 +330,7 @@ it 'signup directs user to shipper-compliance index' do
         click_button 'submit'
         visit "/Companys/#{company2.id}/edit"
         expect(page.current_path).to include('/companies')
+        expect(page).to have_content("You cannot eidt a company you didn't create")
       end
 
       it 'lets a user edit their own created company if they are logged in' do
@@ -356,6 +366,7 @@ it 'signup directs user to shipper-compliance index' do
         click_button 'submit'
         expect(Company.find_by(:name => "Bed Bath")).to be(nil)
         expect(page.current_path).to eq("/companiess/1/edit")
+        expect(page).to have_content("Please enter a name")
       end
     end
 
@@ -363,6 +374,7 @@ it 'signup directs user to shipper-compliance index' do
       it 'does not load -- instead redirects to login' do
         get '/companies/1/edit'
         expect(last_response.location).to include("/login")
+        expect(page).to have_content("You must login to view that page.")
       end
     end
   end
@@ -408,6 +420,7 @@ it 'signup directs user to shipper-compliance index' do
         company = Company.create(:name => "Bed Bath", :user_id => 1)
         visit '/companies/1'
         expect(page.current_path).to eq("/login")
+        expect(page).to have_content("You must login to view that page.")
       end
     end
   end
