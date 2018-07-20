@@ -11,7 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180718044550) do
+ActiveRecord::Schema.define(version: 20180719050654) do
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "user_comment"
+    t.integer  "user_id"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string   "name"
+    t.text     "shipping_container_notes"
+    t.text     "label_notes"
+    t.text     "asn_notes"
+    t.text     "routing_notes"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
