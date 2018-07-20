@@ -1,0 +1,3 @@
+class CompaniessController < ApplicationController
+
+end
