@@ -4,7 +4,7 @@ require 'pry'
 
 describe CommentsController do
 
-  describe "add comments to companies" do
+  describe "add comments to existing company" do
     it 'allows a suer to add comments to an existing company if logged in' do
       it "lets a user logout if they are already logged in" do
       user = User.create(:username => "nelsonmuntz", :email => "haha@juno.com", :password => "nukethewales")
