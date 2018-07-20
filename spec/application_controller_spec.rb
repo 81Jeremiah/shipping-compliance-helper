@@ -1,9 +1,9 @@
 require_relative "spec_helper"
 require 'pry'
 
-def app
-  ApplicationController
-end
+# def app
+#   ApplicationController
+# end
 
 describe ApplicationController do
 
@@ -22,7 +22,7 @@ describe "Signup Page" do
 	  expect(last_response.status).to eq(200)
 	end
 
-it 'signup directs user to shipper-compliance index' do
+    it 'signup directs user to shipper-compliance index' do
       params = {
         :username => "nelsonmuntz",
         :email => "haha@juno.com",
@@ -32,7 +32,7 @@ it 'signup directs user to shipper-compliance index' do
       expect(last_response.location).to include("/companies")     
     end
 
-  it 'does not let a user sign up without a username' do
+    it 'does not let a user sign up without a username' do
       params = {
         :username => "",
         :email => "haha@juno.com",
