@@ -65,6 +65,30 @@ it 'signup directs user to shipper-compliance index' do
       expect(page).to have_content("You Must Enter an Password to Continue.")
     end
 
+    it 'does not let a user choose a username that is already taken' do
+    	user =  User.create(:username => "nelsonmuntz", :email => "haha@juno.com", :password => "nukethewales")
+    	params = {
+        :username => "nelsonmuntz",
+        :email => "haha@juno.com",
+        :password => "nukethewales"
+      }
+      post '/signup', params
+      expect(last_response.location).to include("/signup")
+      expect(page).to have_content("Sorry that username is already taken")
+    end
+
+    it 'does not let a user enter an email that is already in the database' do
+    	user =  User.create(:username => "nelsonmuntz", :email => "haha@juno.com", :password => "nukethewales")
+    	params = {
+        :username => "nelsonmuntz",
+        :email => "haha@juno.com",
+        :password => "nukethewales"
+      }
+      post '/signup', params
+      expect(last_response.location).to include("/signup")
+      expect(page).to have_content("That email already has an account, did you mean to login?")
+    end
+
     it 'creates a new user and logs them in on valid submission and does not let a logged in user view the signup page' do
       params = {
         :username => "nelsonmuntz",
