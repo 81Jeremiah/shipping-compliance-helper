@@ -92,15 +92,21 @@ describe UsersController do
     end
 
     it 'does not let a user enter an email that is already in the database' do
-    	user =  User.create(:username => "nelsonmuntz", :email => "haha@juno.com", :password => "nukethewales")
-    	params = {
-        :username => "nelsonmuntz",
-        :email => "haha@juno.com",
-        :password => "nukethewales"
+    	user =  User.create(:username => "milhouse", :email => "mymomsaysimcool@yahoo.com", :password => "imadud")
+    	visit "/signup"
+      fill_in "username", with: "joeyjojojrshabadoo"
+      fill_in "email", with: "mymomsaysimcool@yahoo.com"
+      fill_in "password", with: "imadud"
+      click_on "submit"
+      expect(page).to have_content("That email already has an account, did you mean to login?")
+
+      params = {
+        :username => "milhouse",
+        :email => "mymomsaysimcool@yahoo.com",
+        :password => "imadud"
       }
       post '/signup', params
       expect(last_response.location).to include("/signup")
-      expect(page).to have_content("That email already has an account, did you mean to login?")
     end
 
     it 'creates a new user and logs them in on valid submission and does not let a logged in user view the signup page' do
