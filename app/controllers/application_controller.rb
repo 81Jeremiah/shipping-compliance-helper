@@ -15,8 +15,22 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    erb :index
-
+  	if !logged_in?
+     erb :index
+    else
+     redirect to "/companies"
+    end
   end
+
+  helpers do
+    def logged_in?
+      !!current_user
+    end
+
+    def current_user
+      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+    end
+  end
+
 
 end
