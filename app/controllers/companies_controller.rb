@@ -1,3 +1,3 @@
-class CompaniessController < ApplicationController
+class CompaniesController < ApplicationController
 
 end

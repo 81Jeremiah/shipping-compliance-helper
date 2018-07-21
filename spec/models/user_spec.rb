@@ -1,4 +1,6 @@
+require 'spec_helper'
 require 'pry'
+
 describe 'User' do
   before do
     @user = User.create(:username => "william henry harrison", :email => "idiedin30days@aol.com", :password => "coatsr4wimps")

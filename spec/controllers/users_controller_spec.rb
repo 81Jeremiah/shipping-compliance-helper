@@ -1,4 +1,4 @@
-require_relative "spec_helper"
+require 'spec_helper'
 require 'pry'
 
 # def app
@@ -6,14 +6,15 @@ require 'pry'
 # end
 
 describe UsersController do
-	describe "Signup Page" do
+	
+  describe "Signup Page" do
 
-	it 'loads the signup page' do
-	  get '/signup'
-	  expect(last_response.status).to eq(200)
-	end
+  	it 'loads the signup page' do
+  	  get '/signup'
+  	  expect(last_response.status).to eq(200)
+  	end
 
-	  it 'signup directs user to shipper-compliance index' do
+    it 'signup directs user to shipper-compliance index' do
       params = {
         :username => "nelsonmuntz",
         :email => "haha@juno.com",
