@@ -73,14 +73,22 @@ describe UsersController do
 
     it 'does not let a user choose a username that is already taken' do
     	user =  User.create(:username => "nelsonmuntz", :email => "haha@juno.com", :password => "nukethewales")
-    	params = {
+    	
+      visit "/signup"
+      fill_in "username", with: "nelsonmuntz"
+      fill_in "email", with: "haha@juno.com"
+      fill_in "password", with: "nukethewales"
+      click_on "submit"
+      expect(page).to have_content("Sorry that username is already taken")
+
+      params = {
         :username => "nelsonmuntz",
         :email => "haha@juno.com",
         :password => "nukethewales"
       }
       post '/signup', params
       expect(last_response.location).to include("/signup")
-      expect(page).to have_content("Sorry that username is already taken")
+      
     end
 
     it 'does not let a user enter an email that is already in the database' do
