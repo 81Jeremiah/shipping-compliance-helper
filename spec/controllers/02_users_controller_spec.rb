@@ -35,18 +35,33 @@ describe UsersController do
     end
 
     it 'does not let a user sign up without an email' do
+      visit "/signup"
+      fill_in "username", with: "nelsonmuntz"
+      fill_in "email", with: ""
+      fill_in "password", with: "nukethewales"
+      click_on "submit"
+      expect(page).to have_content("You Must Enter an Email to Continue.")
+
       params = {
         :username => "nelsonmuntz",
         :email => "",
         :password => "nukethewales"
       }
       post '/signup', params
+      
       expect(last_response.location).to include('/signup')
-      expect(page).to have_content("You Must Enter an Email to Continue.")
+     
 
     end
 
     it 'does not let a user sign up without a password' do
+      visit "/signup"
+      fill_in "username", with: "nelsonmuntz"
+      fill_in "email", with: "haha@juno.com"
+      fill_in "password", with: ""
+      click_on "submit"
+      expect(page).to have_content("You Must Enter an Password to Continue.")
+
       params = {
         :username => "nelsonmuntz",
         :email => "haha@juno.com",
@@ -54,7 +69,6 @@ describe UsersController do
       }
       post '/signup', params
       expect(last_response.location).to include('/signup')
-      expect(page).to have_content("You Must Enter an Password to Continue.")
     end
 
     it 'does not let a user choose a username that is already taken' do

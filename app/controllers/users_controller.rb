@@ -19,10 +19,10 @@ class UsersController < ApplicationController
       flash[:no_email_warning] = "You Must Enter an Email to Continue."
       redirect to "/signup"
     elsif params[:username].empty?
-      flash[:no_username_warning] = "please enter a username to continue"
+      flash[:no_username_warning] = "You Must Enter an Username to Continue."
       redirect to "/signup"
     elsif params[:password].empty?
-      flash[:no_password_warning] = "please enter a password to continue"
+      flash[:no_password_warning] = "You Must Enter an Password to Continue."
       redirect to "/signup"
     else
       redirect to "/signup"
