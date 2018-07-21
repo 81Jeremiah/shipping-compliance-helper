@@ -21,12 +21,14 @@ class UsersController < ApplicationController
     elsif params[:username].empty?
       flash[:no_username_warning] = "You Must Enter an Username to Continue."
       redirect to "/signup"
+    elsif User.all.any?{|user|user.username == params[:username]}
+      flash[:username_warning] = "Sorry that username is already taken"
+      redirect to "/signup"
     elsif params[:password].empty?
       flash[:no_password_warning] = "You Must Enter an Password to Continue."
       redirect to "/signup"
     else
       redirect to "/signup"
-    #flash message please enter email username & password to continue   
     end
   end
 end
