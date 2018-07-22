@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
   	  redirect to "/companies"
     else
-      flash[:wrong_password] = "Username or password is not correct./<br> Please try again or create an account"
+      flash[:wrong_password] = "Username or password is not correct.<br> Please try again or create an account"
       redirect to "/"
     end
   end
