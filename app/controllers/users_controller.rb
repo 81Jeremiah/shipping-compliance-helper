@@ -1,16 +1,25 @@
 class UsersController < ApplicationController
 
+
+
+
+  post '/login' do
+  	@user = User.find_by(username: params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+  	  redirect to "/companies"
+    else
+      flash[:wrong_password] = "Username or password is not correct./<br> Please try again or create an account"
+      redirect to "/"
+    end
+  end
+
   get '/signup' do 
     if !logged_in?
      erb :'users/signup' 
     else
       redirect to "/companies"
-		end
-  end
-
-  post '/login' do
-  	@user = User.find_by(username: params[:username])
-  	redirect to "/companies"
+    end
   end
   
   post "/signup" do
@@ -38,4 +47,14 @@ class UsersController < ApplicationController
       redirect to "/signup"
     end
   end
+
+  get '/logout' do
+    if !logged_in?
+      redirect to "/"
+    else
+      session.clear
+      redirect to "/"
+    end
+  end
+
 end
