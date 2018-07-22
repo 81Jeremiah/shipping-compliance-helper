@@ -22,12 +22,13 @@ class CommentsController < ApplicationController
   	  erb :'comments/edit_comment'
     else
       redirect to "/companies/#{@company.id}"
+    end
   end
 
   patch '/comments/:id' do
 
     comment = Comment.find_by(id: params[:id])
-    company = Comapny.find_by(id: comment.company_id)
+    company = Company.find_by(id: comment.company_id)
     if !params[:user_comment].empty?
       comment.update(user_comment: params[:user_comment])
       redirect to "/companies/#{comment.company_id}"
