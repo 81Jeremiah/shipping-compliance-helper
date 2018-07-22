@@ -1,8 +1,9 @@
 <H1>Please see below for all of the companies:</H1>
 <% @companies.each.with_index(1) do |company, i| %>
-  <p><a href="companies/<% company.id %>"> <%= i %>.<%= company.name %></a></p>
+  <p><a href="companies/<%= company.id %>"> <%= i %>.<%= company.name %></a></p>
  <% end %>
  
- <h2> Don't see a company you konw about and with to contrbutre?</h2>
- <h3>Please click <a href="/companies/new">here</a></h3>
+ <h3> Don't see a company and wish to contribute? <br> 
+      Please click <a href="/companies/new">here</a></h3>
 
+<p><a href="/logout">Logout</a>
