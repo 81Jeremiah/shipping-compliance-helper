@@ -86,7 +86,7 @@ describe CompaniesController do
       it 'lets user create a company if they are logged in' do
         user = User.create(:username => "nelsonmuntz", :email => "haha@juno.com", :password => "nukethewales")
 
-        visit '/login'
+        visit '/'
 
         fill_in(:username, :with => "nelsonmuntz")
         fill_in(:password, :with => "nukethewales")
@@ -107,7 +107,7 @@ describe CompaniesController do
       	user = User.create(:username => "nelsonmuntz", :email => "haha@juno.com", :password => "nukethewales")
         company = Company.create(:name => "Bed Bath", :user_id => user.id)
         
-        visit '/login'
+        visit '/'
 
         fill_in(:username, :with => "nelsonmuntz")
         fill_in(:password, :with => "nukethewales")
@@ -125,7 +125,7 @@ describe CompaniesController do
       it 'does not let a user create a company without a name' do
         user = User.create(:username => "nelsonmuntz", :email => "haha@juno.com", :password => "nukethewales")
 
-        visit '/login'
+        visit '/'
 
         fill_in(:username, :with => "nelsonmuntz")
         fill_in(:password, :with => "nukethewales")
@@ -158,7 +158,7 @@ describe CompaniesController do
         user = User.create(:username => "nelsonmuntz", :email => "haha@juno.com", :password => "nukethewales")
         company = Company.create(:name => "Staples", :user_id => user.id)
 
-        visit '/login'
+        visit '/'
 
         fill_in(:username, :with => "nelsonmuntz")
         fill_in(:password, :with => "nukethewales")
@@ -188,7 +188,7 @@ describe CompaniesController do
       it 'lets a user view Company edit form if they are logged in' do
         user = User.create(:username => "nelsonmuntz", :email => "haha@juno.com", :password => "nukethewales")
         company = Company.create(:name => "Bed Bath!", :user_id => user.id)
-        visit '/login'
+        visit '/'
 
         fill_in(:username, :with => "nelsonmuntz")
         fill_in(:password, :with => "nukethewales")
@@ -205,7 +205,7 @@ describe CompaniesController do
         user2 = User.create(:username => "milhouse", :email => "mymomsaysimcool@gmail.com", :password => "imadud")
         company2 = Company.create(:name => "Hot Topic", :user_id => user2.id)
 
-        visit '/login'
+        visit '/'
 
         fill_in(:username, :with => "nelsonmuntz")
         fill_in(:password, :with => "nukethewales")
@@ -218,7 +218,7 @@ describe CompaniesController do
       it 'lets a user edit their own created company if they are logged in' do
         user = User.create(:username => "nelsonmuntz", :email => "haha@juno.com", :password => "nukethewales")
         company = Company.create(:name => "Bed Bath", :user_id => 1)
-        visit '/login'
+        visit '/'
 
         fill_in(:username, :with => "nelsonmuntz")
         fill_in(:password, :with => "nukethewales")
@@ -236,7 +236,7 @@ describe CompaniesController do
       it 'does not let a user edit a text with blank name' do
         user = User.create(:username => "nelsonmuntz", :email => "haha@juno.com", :password => "nukethewales")
         company = Company.create(:name => "Bed Bath", :user_id => 1)
-        visit '/login'
+        visit '/'
 
         fill_in(:username, :with => "nelsonmuntz")
         fill_in(:password, :with => "nukethewales")
@@ -266,7 +266,7 @@ describe CompaniesController do
       it 'lets a user delete a comapny they created if they are logged in' do
         user = User.create(:username => "nelsonmuntz", :email => "haha@juno.com", :password => "nukethewales")
         company = Company.create(:name => "Bed Bath", :user_id => 1)
-        visit '/login'
+        visit '/'
 
         fill_in(:username, :with => "nelsonmuntz")
         fill_in(:password, :with => "nukethewales")
@@ -284,7 +284,7 @@ describe CompaniesController do
         user2 = User.create(:username => "millhouse", :email => "mymomsaysimcool@gmail.com", :password => "imadud")
         company2 = Company.create(:name => "Hot Topic", :user_id => user2.id)
 
-        visit '/login'
+        visit '/'
 
         fill_in(:username, :with => "nelsonmuntz")
         fill_in(:password, :with => "nukethewales")
@@ -301,7 +301,7 @@ describe CompaniesController do
       it 'does not load let user delete a company if not logged in' do
         company = Company.create(:name => "Bed Bath", :user_id => 1)
         visit '/companies/1'
-        expect(page.current_path).to eq("/login")
+        expect(page.current_path).to eq("/")
         expect(page).to have_content("You must login to view that page.")
       end
     end
