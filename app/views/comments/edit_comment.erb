@@ -1,5 +1,5 @@
 <h1>Second thoughs? Edit your comment below:</h1>
-<form action="/comment/<%= @comment.id %>" method="POST">
+<form action="/comments/<%= @comment.id %>" method="POST">
   <input id="hidden" type="hidden" name="_method" value="patch">
   <label for="user_comment"></label>
   <textarea name="user_comment" id="content" rows="4" cols="50"><%= @comment.user_comment %></textarea>
