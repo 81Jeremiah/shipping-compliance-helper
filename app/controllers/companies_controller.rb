@@ -56,7 +56,8 @@ class CompaniesController < ApplicationController
     if logged_in? && @company.user_id == session[:user_id]
       erb :'companies/edit_company'
     else
-      redirect to "/login"
+      flash[:edit_error] = "You cannot edit a company you didn't create" 	
+      redirect to "/companies"
     end
   end
 
