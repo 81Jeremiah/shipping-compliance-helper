@@ -24,7 +24,11 @@
 
 <h1>COMMENTS</h1>
 <% @company.comments.each do |comment| %>
+   <p><%= comment.user.username %> Says:
    <p><%= comment.user_comment %></p>
+     <% if comment.user_id == session[:user_id] %>
+     <p><%= comment.user.username %><a href="/comments/<% @user.slug %>">Edit this comment</a></p>
+     <% end %>
 <% end %>
 
 <a href="/companies">Return to all companies</a><br>
