@@ -14,4 +14,27 @@ class CommentsController < ApplicationController
   	 end
 
   end
+
+  get '/comments/:id/edit' do
+  	@comment = Comment.find_by(id: params[:id])
+  	@company = Company.find_by(id: @comment.company_id)
+  	if @comment.user_id = current_user.id
+  	  erb :'comments/edit_comment'
+    else
+      redirect to "/companies/#{@company.id}"
+  end
+
+  patch '/comments/:id' do
+
+    comment = Comment.find_by(id: params[:id])
+    company = Comapny.find_by(id: comment.company_id)
+    if !params[:user_comment].empty?
+      comment.update(user_comment: params[:user_comment])
+      redirect to "/companies/#{comment.company_id}"
+    else
+      redirect to "/comments/#{comment.id}/edit"
+    end
+  end
+
+
 end
