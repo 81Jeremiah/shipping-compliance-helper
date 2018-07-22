@@ -1,0 +1,5 @@
+<h1> Thanks for contibuting by adding the below companies</h1>
+<h2>Please click on any of the companies below to edit</h2>
+<% @user.companies.each do |company| %>
+  <p><a href="/companies/<%= company.id %>"><%= company.name %> </a></p>
+<% end %>
