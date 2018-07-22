@@ -9,7 +9,7 @@ describe CompaniesController do
       get '/companies'
       expect(last_response.location).to include("/")
       visit "/companies"
-      expect(page).to have_content("You Must login First.")
+      expect(page).to have_content("You must login to view that page.")
     end
 
     it 'does load /companies if user is logged in' do
@@ -64,7 +64,7 @@ describe CompaniesController do
         get '/companies'
         expect(last_response.location).to include("/")
         visit "/companies"
-        expect(page).to have_content("You Must login First.")
+        expect(page).to have_content("You must login to view that page.")
       end
     end
   end
@@ -93,11 +93,11 @@ describe CompaniesController do
         click_button 'login'
 
         visit '/companies/new'
-        fill_in(:name, :with => "Ace Harwdare")
+        fill_in(:name, :with => "Ace Hardware")
         click_button 'submit'
 
         user = User.find_by(:username => "nelsonmuntz")
-        company = Company.find_by(:name => "Ace Harwdare")
+        company = Company.find_by(:name => "Ace Hardware")
         #expect(company).to be_instance_of(Company)
         expect(company.user_id).to eq(user.id)
         expect(page.status_code).to eq(200)
@@ -111,14 +111,14 @@ describe CompaniesController do
 
         fill_in(:username, :with => "nelsonmuntz")
         fill_in(:password, :with => "nukethewales")
-        click_button 'submit'
+        click_button 'login'
 
         visit '/companies/new'
         fill_in(:name, :with => "Bed Bath")
         click_button 'submit'
          
         expect(page.current_path).to eq("/companies/new")
-        expect(page).to have_content("That company already exists, please create a new company or comment on an existing company.")
+        expect(page).to have_content("A company must have a name and can't already be in the database.")
       end
 
 
@@ -129,7 +129,7 @@ describe CompaniesController do
 
         fill_in(:username, :with => "nelsonmuntz")
         fill_in(:password, :with => "nukethewales")
-        click_button 'submit'
+        click_button 'login'
 
         visit '/companies/new'
 
@@ -138,14 +138,15 @@ describe CompaniesController do
 
         expect(Company.find_by(:name => "")).to eq(nil)
         expect(page.current_path).to eq("/companies/new")
-        expect(page).to have_content("Please enter a name")
+        expect(page).to have_content("A company must have a name and can't already be in the database.")
       end
     end
 
     context 'logged out' do
       it 'does not let user view new company form if not logged in' do
         get '/companies/new'
-        expect(last_response.location).to include("/login")
+        expect(last_response.location).to include("/")
+        visit '/companies/new'
         expect(page).to have_content("You must login to view that page.")
       end
     end
@@ -162,9 +163,9 @@ describe CompaniesController do
 
         fill_in(:username, :with => "nelsonmuntz")
         fill_in(:password, :with => "nukethewales")
-        click_button 'submit'
+        click_button 'login'
 
-        visit "/Companys/#{company.id}"
+        visit "/companies/#{company.id}"
         expect(page.status_code).to eq(200)
         expect(page.body).to include("Delete Company")
         expect(page.body).to include(company.name)
@@ -177,7 +178,8 @@ describe CompaniesController do
         user = User.create(:username => "nelsonmuntz", :email => "haha@juno.com", :password => "nukethewales")
         company = Company.create(:name => "Amaramrk", :user_id => user.id)
         get "/companies/#{company.id}"
-        expect(last_response.location).to include("/login")
+        expect(last_response.location).to include("/")
+        visit "/companies/#{company.id}"
         expect(page).to have_content("You must login to view that page.")
       end
     end
@@ -192,8 +194,8 @@ describe CompaniesController do
 
         fill_in(:username, :with => "nelsonmuntz")
         fill_in(:password, :with => "nukethewales")
-        click_button 'submit'
-        visit '/companies/1/edit'
+        click_button 'login'
+        visit "/companies/#{company.id}/edit"
         expect(page.status_code).to eq(200)
         expect(page.body).to include(company.name)
       end
