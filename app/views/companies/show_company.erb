@@ -1,0 +1,12 @@
+<h1><%= @company.name %> </h1>
+<p>Shipping Container Notes: <%= @company.shipping_container_notes %></p>
+<p>Label Notes: <%= @company.label_notes %></p>
+<p>ASN Notes: <%= @company.asn_notes %></p>
+<p>Routing Notes: <%= @company.routing_notes %></p>
+<button type="button"><a href="/companies/<%= @company.id %>/edit"><b>Edit Company</b></button>
+<form action="/companies/<%= @company.id %>/delete" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete Company">
+</form>
+<br></br>
+<a href="/companies">Return to all companies</a><br>
