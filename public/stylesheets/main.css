@@ -1,3 +1,11 @@
+
+/* header {
+    font-family: 'Libre Barcode 128 Text', cursive;
+    font-size: 25px;
+    position: center;
+    margin-bottom: 10px;
+  }*/
+
 @media screen {
   /* --- Reset Styles --- */
   * {
@@ -34,6 +42,7 @@
     max-width: 960px;
     padding: 2.25%; /* 18px / 800px */
     width: 85%;
+    
   }
 
   h1 {
@@ -86,6 +95,7 @@
     border-top: 2px solid #ccc;
     margin-top: 20px;
     padding-top: 20px;
+    text-align: center;
   }
 }
 
@@ -147,4 +157,14 @@
     font-size: 15px;
     color: black;
   }
+  /* --- index page --- */
+  /*div.wrapper .index_page {
+    width: auto;
+    margin: auto;
+    padding: auto;
+    
+  }*/
+
+  /* --- Header --- */
+
 
