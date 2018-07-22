@@ -1,12 +1,44 @@
-<h1>Welcome, please log in</h1>
-<form action="/login" method="POST">
-  <label for="username">Username: </label>
-  <input type="text" id="username" name="username"><br>
-  <label for="password">Password: </label>
-  <input type="password" id="password" name="password"><br>
-  <input type="submit" value="login">
-</form>
 
-<div id="create_user">
-  <p>Don't have an account? Create a free account <a href="/signup">here</a></p>
-</div>
+
+
+
+<body class="text-center">	<h1></h1>
+	<form class="form-signin" action="/login" method="POST">
+	  
+       <h1 class="h3 mb-3 font-weight-normal"> Welcome! <br> Please log in</h1>
+	  <label for="username" class="sr-only">Username: </label>
+	  
+	  <input type="text" id="username" class="form-control" name="username" required autofocus><br>
+
+	  <label for="password" class="sr-only">Password:&nbsp; </label>
+	  <input type="password" id="password" class="form-control" name="password" required><br>
+
+	   <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div>
+	  
+	  <button class="btn btn-lg btn-primary btn-block" type="submit" value="login">Log In</button>
+	
+
+	<div id="create_user">
+	  <p>Don't have an account? <br>Create a free account <a href="/signup">here</a></p>
+	</div>
+	</form>
+</body>
+
+<!-- <body class="text-center">
+    <form class="form-signin">
+      <img class="mb-4" src="../../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+     
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+     
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+    </form>
+  </body> -->
