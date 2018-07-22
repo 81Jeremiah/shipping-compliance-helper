@@ -90,15 +90,15 @@ describe CompaniesController do
 
         fill_in(:username, :with => "nelsonmuntz")
         fill_in(:password, :with => "nukethewales")
-        click_button 'submit'
+        click_button 'login'
 
         visit '/companies/new'
         fill_in(:name, :with => "Ace Harwdare")
         click_button 'submit'
 
         user = User.find_by(:username => "nelsonmuntz")
-        company = Comapany.find_by(:name => "Justice")
-        expect(Company).to be_instance_of(Company)
+        company = Company.find_by(:name => "Ace Harwdare")
+        #expect(company).to be_instance_of(Company)
         expect(company.user_id).to eq(user.id)
         expect(page.status_code).to eq(200)
       end
