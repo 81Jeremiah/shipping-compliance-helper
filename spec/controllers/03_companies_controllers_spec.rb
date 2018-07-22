@@ -8,7 +8,8 @@ describe CompaniesController do
     it 'does not load companies if user not logged in' do
       get '/companies'
       expect(last_response.location).to include("/")
-      #expect(page).to have_content("You Must login First.")
+      visit "/companies"
+      expect(page).to have_content("You Must login First.")
     end
 
     it 'does load /companies if user is logged in' do
@@ -46,14 +47,14 @@ describe CompaniesController do
         user2 = User.create(:username => "milhouse", :email => "mymomsaysimcool@gmail.com", :password => "imadud")
         company2 = Company.create(:name => "Hot Topic", :user_id => user2.id)
 
-        visit '/login'
+        visit '/'
 
         fill_in(:username, :with => "nelsonmuntz")
         fill_in(:password, :with => "nukethewales")
-        click_button 'submit'
+        click_button 'login'
         visit "/companies"
         expect(page.body).to include(company1.name)
-        expect(page.body).to include(comapny2.name)
+        expect(page.body).to include(company2.name)
       end
     end
   
@@ -61,8 +62,9 @@ describe CompaniesController do
     context 'logged out' do
       it 'does not let a user view the all companies if not logged in' do
         get '/companies'
-        expect(last_response.location).to include("/login")
-        expect(page).to have_content("Please login to view that page.")
+        expect(last_response.location).to include("/")
+        visit "/companies"
+        expect(page).to have_content("You Must login First.")
       end
     end
   end
@@ -72,11 +74,11 @@ describe CompaniesController do
       it 'lets user view new company form if logged in' do
         user = User.create(:username => "nelsonmuntz", :email => "haha@juno.com", :password => "nukethewales")
 
-        visit '/login'
+        visit '/'
 
         fill_in(:username, :with => "nelsonmuntz")
         fill_in(:password, :with => "nukethewales")
-        click_button 'submit'
+        click_button 'login'
         visit '/companies/new'
         expect(page.status_code).to eq(200)
       end
