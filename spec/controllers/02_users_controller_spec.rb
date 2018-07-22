@@ -156,9 +156,9 @@ describe UsersController do
         :username => "nelsonmuntz",
         :password => "nukethewales"
       }
-      post '/login', params
+      post '/', params
       get '/logout'
-      expect(last_response.location).to include("/login")
+      expect(last_response.location).to include("/")
     end
 
     it 'does not let a user logout if not logged in' do
