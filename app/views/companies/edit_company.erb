@@ -1,0 +1,26 @@
+<h1>Edit the company you added </h1>
+<form action="/companies/<%= @company.id %>" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+
+<label for="name">Company Name: </label>
+  <input type="text" id="name" value="<%= @company.name %>" name="name">
+    <br></br>  
+
+  <label for="shipping_container_notes">Notes about shipping container(ie. box max weight & size, pallet max height etc.): </label>
+    <textarea id="shipping_container_notes" name="shipping_container_notes" rows="4" cols="50"><%= @company.shipping_container_notes %></textarea>
+    <br></br>
+
+  <label for="label_notes">Notes about the carton labels(ie. carton marks, GS1's etc.): </label>
+    <textarea id="label_notes" name="label_notes" rows="4" cols="50"><%= @company.label_notes %></textarea>
+    <br></br>
+
+  <label for="asn_notes">Notes about the ASN(ie. how early to send, routing # required etc.): </label>
+    <textarea id="asn_notes" name="asn_notes" rows="4" cols="50"><%= @company.asn_notes %></textarea>
+    <br></br>
+
+  <label for="routing_notes">Routing notes(ie appoint required, how early routing request needs to made etc.): </label>
+    <textarea id="routing_notes" name="routing_notes" rows="4" cols="50"><%= @company.routing_notes %></textarea>
+    <br></br>
+
+  <input type="submit" value="submit">
+</form>
