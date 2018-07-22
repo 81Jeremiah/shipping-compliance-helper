@@ -5,7 +5,7 @@ class CompaniesController < ApplicationController
 	    @companies = Company.all
 	    erb :'companies/index'
 	  else
-	  	flash[:not_logged_in] = "You Must login First."
+	  	flash[:not_logged_in] = "You must login to view that page."
 		redirect to "/"
 	  end
 	end
@@ -37,12 +37,39 @@ class CompaniesController < ApplicationController
     end
 
     get '/companies/:id' do 
-      @company = Company.find_by(id: params[:id])
-      if @company.user_id == session[:user_id]
+      @company = Company.find_by(id: params[:id]) 
+      if @company.user_id == session[:user_id] && logged_in?
         erb :'/companies/show_company'
       else
        redirect to "/companies"
       end
     end
+
+    delete '/companies/:id/delete' do
+      company = Company.find_by(id: params[:id])
+      company.delete
+      redirect to "/companies"
+    end
+
+  get '/companies/:id/edit' do
+    @company = Company.find_by(id: params[:id])
+    if logged_in? && @company.user_id == session[:user_id]
+      erb :'companies/edit_company'
+    else
+      redirect to "/login"
+    end
+  end
+
+  patch '/companies/:id' do
+
+    company = Company.find_by(id: params[:id])
+
+    if !params[:name].empty?
+      company.update(name: params[:name], shipping_container_notes: params[:shipping_container_notes], label_notes: params[:label_notes], asn_notes: params[:asn_notes], routing_notes: params[:routing_notes])
+      redirect to "/companies/#{company.id}"
+    else
+      redirect to "/companies/#{company.id}/edit"
+    end
+  end
 
 end
