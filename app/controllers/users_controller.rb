@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   
   post "/signup" do
   	@user = User.create(params)
-  	if @user.save && !params[:username].empty? && !params[:email].empty? && !params[:password].empty? #only allows new user if user name and email are entered
+  	if @user.save #&& !params[:username].empty? && !params[:email].empty? && !params[:password].empty? #only allows new user if user name and email are entered
     	session[:user_id] = @user.id	
       redirect to "/companies"
     elsif params[:username].empty?
