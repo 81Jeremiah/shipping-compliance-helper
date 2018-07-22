@@ -1,0 +1,24 @@
+<h1>Please use the form below to add a new company</h1>
+<form action="/companies/<%= @user.slug %>" method="POST">
+  <label for="name">Company Name: </label>
+  <input type="text" id="name" name="params[:name]">
+    <br></br>
+
+  <label for="shipping_container_notes">Notes about shippin container(ie. box max weight & size, pallet max height etc.): </label>
+    <textarea id="shipping_container_notes" name="params[:shipping_container_notes]" rows="4" cols="50"></textarea>
+    <br></br>
+
+  <label for="label_notes">Notes about the carton labels(ie. carton marks, GS1's etc.): </label>
+    <textarea id="label_notes" name="params[:shipping_container_notes]" rows="4" cols="50"></textarea>
+    <br></br>
+
+  <label for="asn_notes">Notes about the ASN(ie. how early to send, routing # required etc.): </label>
+    <textarea id="asn_notes" name="params[:asn_notes]" rows="4" cols="50"></textarea>
+    <br></br>
+
+  <label for="routing_notes">Routing notes(ie appoint required, how early routing request needs to made etc.): </label>
+    <textarea id="routing_notes" name="params[:routing_notes]" rows="4" cols="50"></textarea>
+    <br></br>
+
+  <input type="submit" value="submit">
+</form>
