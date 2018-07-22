@@ -122,10 +122,6 @@ describe UsersController do
   end
   
   describe "login" do
-    it 'loads the login page' do
-      get '/login'
-      expect(last_response.status).to eq(200)
-    end
 
     it 'loads all current companies after login' do
       user = User.create(:username => "nelsonmuntz", :email => "haha@juno.com", :password => "nukethewales")
@@ -147,7 +143,7 @@ describe UsersController do
         :password => "nukethewales"
       }
       post '/login', params
-      get '/login'
+      get '/'
       expect(last_response.location).to include("/companies")
     end
   end
