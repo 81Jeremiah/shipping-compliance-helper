@@ -38,7 +38,7 @@ class CompaniesController < ApplicationController
 
     get '/companies/:id' do 
       @company = Company.find_by(id: params[:id]) 
-      if @company.user_id == session[:user_id] && logged_in?
+      if logged_in?
         erb :'/companies/show_company'
       else
        redirect to "/companies"
