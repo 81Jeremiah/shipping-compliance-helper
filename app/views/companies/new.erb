@@ -1,10 +1,10 @@
 <h1>Please use the form below to add a new company</h1>
 <form action="/companies/<%= @user.slug %>" method="POST">
   <h3><label for="name">Company Name: </label></h3>
-  <input type="text" id="name" name="name">
+  <input type="text" id="name" name="name" required>
     <br></br>
 
-  <label for="shipping_container_notes">Notes about shippin container(ie. box max weight & size, pallet max height etc.): </label><br>
+  <label for="shipping_container_notes">Notes about shippin container(ie. box max weight and size, pallet max height etc.): </label><br>
     <textarea id="shipping_container_notes" name="shipping_container_notes" rows="4" cols="100"></textarea>
     <br></br>
 

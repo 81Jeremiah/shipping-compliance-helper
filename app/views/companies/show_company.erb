@@ -17,12 +17,12 @@
 	
 	<form action="/comments/<%= @company.id %>" method="POST">
 		<label for="user_comment">Got something to add?</label><br>
-		<textarea id="user_comment" name="user_comment" rows="4" cols="50"></textarea>
+		<textarea id="user_comment" name="user_comment" rows="4" cols="50" required></textarea>
 		<input type="submit" value="submit">
     </form>
 
 
-<h1>COMMENTS</h1>
+<h2>COMMENTS</h2>
 <% @company.comments.each do |comment| %>
    <p><%= comment.user.username %> Says:
    <p><%= comment.user_comment %></p>
