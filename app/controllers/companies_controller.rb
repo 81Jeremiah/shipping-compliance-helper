@@ -18,38 +18,33 @@ class CompaniesController < ApplicationController
 	  	flash[:not_logged_in] = "You must login to view that page."
 		redirect to "/"
 	  end
+  end
+
+  post '/companies/:userslug' do
+    if !params[:name].empty? && Company.all.none?{|company|company.name == params[:name]}
+      @user = User.find_by_slug(params[:userslug])
+      @company = Company.create(name: params[:name], shipping_container_notes: params[:shipping_container_notes], label_notes: params[:label_notes], asn_notes: params[:asn_notes], routing_notes: params[:routing_notes], user_id: @user.id )
+      redirect to "/companies/#{@company.id}"
+    else
+      flash[:need_name] = "A company must have a name and can't already be in the database."
+      redirect to "/companies/new"
     end
+  end
 
-    post '/companies/:userslug' do
-      
-
-      if !params[:name].empty? && Company.all.none?{|company|company.name == params[:name]}
-      	@user = User.find_by_slug(params[:userslug])
-      	@company = Company.create(name: params[:name], shipping_container_notes: params[:shipping_container_notes], label_notes: params[:label_notes], asn_notes: params[:asn_notes], routing_notes: params[:routing_notes], user_id: @user.id )
-        #binding.pry
-        redirect to "/companies/#{@company.id}"
-      
-
-       else
-      	flash[:need_name] = "A company must have a name and can't already be in the database."
-      	redirect to "/companies/new"
-       end
-    end
-
-    get '/companies/:id' do 
-      @company = Company.find_by(id: params[:id]) 
-      if logged_in?
-        erb :'/companies/show_company'
-      else
-       redirect to "/companies"
-      end
-    end
-
-    delete '/companies/:id/delete' do
-      company = Company.find_by(id: params[:id])
-      company.delete
+  get '/companies/:id' do 
+    @company = Company.find_by(id: params[:id]) 
+    if logged_in?
+       erb :'/companies/show_company'
+    else
       redirect to "/companies"
     end
+  end
+
+  delete '/companies/:id/delete' do
+    company = Company.find_by(id: params[:id])
+    company.delete
+    redirect to "/companies"
+  end
 
   get '/companies/:id/edit' do
     @company = Company.find_by(id: params[:id])
@@ -62,9 +57,7 @@ class CompaniesController < ApplicationController
   end
 
   patch '/companies/:id' do
-
     company = Company.find_by(id: params[:id])
-
     if !params[:name].empty?
       company.update(name: params[:name], shipping_container_notes: params[:shipping_container_notes], label_notes: params[:label_notes], asn_notes: params[:asn_notes], routing_notes: params[:routing_notes])
       redirect to "/companies/#{company.id}"

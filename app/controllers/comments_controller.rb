@@ -5,14 +5,11 @@ class CommentsController < ApplicationController
   	 @company = Company.find_by(id: params[:company_id])
   	 @comment = Comment.create(user_comment: params[:user_comment], user_id: @user.id, company_id: @company.id)
      if @company.save
-
   	   redirect to "/companies/#{@company.id}"
   	 else
-  	 	flash[:comment_warning] = "Comment cannot be empty."
-
-  	 	redirect to "/companies/#{@company.id}"
+  	 	 flash[:comment_warning] = "Comment cannot be empty."
+  	 	 redirect to "/companies/#{@company.id}"
   	 end
-
   end
 
   get '/comments/:id/edit' do
@@ -26,7 +23,6 @@ class CommentsController < ApplicationController
   end
 
   patch '/comments/:id' do
-
     comment = Comment.find_by(id: params[:id])
     company = Company.find_by(id: comment.company_id)
     if !params[:user_comment].empty?
@@ -36,6 +32,4 @@ class CommentsController < ApplicationController
       redirect to "/comments/#{comment.id}/edit"
     end
   end
-
-
 end
