@@ -3,3 +3,6 @@
 <% @user.companies.each do |company| %>
   <p><a href="/companies/<%= company.id %>"><%= company.name %> </a></p>
 <% end %>
+<button class= "btn">
+  <a href="/companies" >Return to all Companies</a>
+</button>
