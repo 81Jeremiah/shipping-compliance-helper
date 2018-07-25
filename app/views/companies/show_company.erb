@@ -26,10 +26,10 @@
 
 <h2>COMMENTS</h2>
 <% @company.comments.each do |comment| %>
-   <p><%= comment.user.username %> Says:
+   <p><%= comment.user.username %> says:
    <p><%= comment.user_comment %></p>
      <% if comment.user_id == session[:user_id] %>
-     <p><%= comment.user.username %><a href="/comments/<%= comment.id %>/edit">Edit this comment</a></p>
+     <p><%= comment.user.username %><a href="/comments/<%= comment.id %>/edit"> Edit this comment</a></p>
      <% end %>
 <% end %>
 
