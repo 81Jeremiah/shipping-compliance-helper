@@ -20,7 +20,7 @@ class CompaniesController < ApplicationController
 	  end
   end
 
-  post '/companies/:userslug' do
+  post '/companies/:userslug' do #check if this route is correct use of REST
     if !params[:name].empty? && Company.all.none?{|company|company.name == params[:name]}
       @user = User.find_by_slug(params[:userslug])
       @company = Company.create(name: params[:name], shipping_container_notes: params[:shipping_container_notes], label_notes: params[:label_notes], asn_notes: params[:asn_notes], routing_notes: params[:routing_notes], user_id: @user.id )
