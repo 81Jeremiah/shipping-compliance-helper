@@ -5,12 +5,14 @@
 <p>Routing Notes: <%= @company.routing_notes %></p>
 
 <% if @company.user_id == session[:user_id] %>
-	<button><a href="/companies/<%= @company.id %>/edit"><b>Edit Company</b></a></button>
+	<button class="btn"> <a href="/companies/<%= @company.id %>/edit">Edit Company</a></button>
 
-	<form action="/companies/<%= @company.id %>/delete" method="POST">
-	  <input id="hidden" type="hidden" name="_method" value="DELETE">
-	  <input type="submit" value="Delete Company">
-	</form>
+	
+	  <form action="/companies/<%= @company.id %>/delete" method="POST">
+		  <input id="hidden" type="hidden" name="_method" value="DELETE">
+		  <input type="submit" value="Delete Company">
+	   </form>
+ 
 	<br></br>
 
 <% end %>

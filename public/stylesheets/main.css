@@ -21,23 +21,32 @@
 
   /* --- Welcome Page Styles --- */
   body {
-    background: rgb(181,189,200); /* Old browsers */
-    background: -moz-linear-gradient(top, rgba(181,189,200,1) 0%, rgba(130,140,149,1) 36%, rgba(40,52,59,1) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', endColorstr='#28343b',GradientType=0 ); /* IE6-9 */
+    background-image: url(/images/compliance.png);
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: top center; 
+    background-margin:0 0 10 0;
+    background-color: rgb(181,189,200); /* Old browsers */
+    background-color: -moz-linear-gradient(top, rgba(181,189,200,1) 0%, rgba(130,140,149,1) 36%, rgba(40,52,59,1) 100%); /* FF3.6-15 */
+    /*background: -webkit-linear-gradient(top, rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%);*/ /* Chrome10-25,Safari5.1-6 */
+    /*background: linear-gradient(to bottom, rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%);*/ /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', endColorstr='#28343b',GradientType=0 );*/ /* IE6-9 */
 
     /*background-color: lightblue;*/
     color: #333;
     font-family: Sans-Serif;
     line-height: 18px;
   }
-
+  body img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+}
   .wrapper {
     background: #fff;
     -moz-box-shadow: 0 0 10px rgba(0,0,0,.3);
     -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
-    box-shadow: 0 0 10px rgba(0,0,0,.3);
+    box-shadow: 0 0 20px rgba(0,0,0,.3);
     margin: 16px auto;
     max-width: 960px;
     padding: 2.25%; /* 18px / 800px */
@@ -149,7 +158,7 @@
   .btn a:link {
     text-decoration: none;
     font-size: 15px;
-    font-color: black;
+    color: black;
   }
 
   .btn a:visited{
