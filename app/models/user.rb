@@ -8,14 +8,8 @@ class User < ActiveRecord::Base
 
 	has_secure_password
 
+  include Slugger::InstanceMethods
+  extend Slugger::ClassMethods
 
-
-    def slug
-      self.username.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
-    end
-
-    def self.find_by_slug(slug)
-      self.all.find{|user| user.slug == slug}
-    end
-
+    
 end
