@@ -1,37 +1,37 @@
 class CompaniesController < ApplicationController
 
 	get '/companies' do 
-	  if logged_in?
+	  if logged_in?  #get all companies page if logged in
 	    @companies = Company.all
 	    erb :'companies/index'
 	  else
-	  	flash[:not_logged_in] = "You must login to view that page."
-		redirect to "/"
+	  	not_logged_in_warning
+		  redirect to "/"
 	  end
 	end
 
-	get '/companies/new' do
+	get '/companies/new' do #get new company form if logged in
 	  if logged_in?
 	  	@user = User.find_by(id: session[:user_id])
 	  	erb :'companies/new'
 	  else
-	  	flash[:not_logged_in] = "You must login to view that page."
-		redirect to "/"
+	  	not_logged_in_warning
+		  redirect to "/"
 	  end
   end
 
-  post '/companies/:userslug' do #check if this route is correct use of REST
-    if !params[:name].empty? && Company.all.none?{|company|company.name == params[:name]}
-      @user = User.find_by_slug(params[:userslug])
-      @company = Company.create(name: params[:name], shipping_container_notes: params[:shipping_container_notes], label_notes: params[:label_notes], asn_notes: params[:asn_notes], routing_notes: params[:routing_notes], user_id: @user.id )
-      redirect to "/companies/#{@company.id}"
+  post '/companies/:userslug' do #post company to belong to user that is logged in
+    
+    @company = Company.create(name: params[:name], shipping_container_notes: params[:shipping_container_notes], label_notes: params[:label_notes], asn_notes: params[:asn_notes], routing_notes: params[:routing_notes], user_id: current_user.id )
+    if @company.save
+      redirect to "/companies/#{@company.id}"      
     else
-      flash[:need_name] = "A company must have a name and can't already be in the database."
+      company_name_warning
       redirect to "/companies/new"
     end
   end
 
-  get '/companies/:id' do 
+  get '/companies/:id' do  #go to indv company page if logged in
     @company = Company.find_by(id: params[:id]) 
     if logged_in?
        erb :'/companies/show_company'
@@ -40,23 +40,26 @@ class CompaniesController < ApplicationController
     end
   end
 
-  delete '/companies/:id/delete' do
-    company = Company.find_by(id: params[:id])
-    company.delete
-    redirect to "/companies"
+  delete '/companies/:id/delete' do #delete company
+    if logged_in && current_user.id == session[:user_id]
+      company = Company.find_by(id: params[:id])
+      company.delete
+      redirect to "/companies"
+    else
+      redirect to "/companies"
   end
 
-  get '/companies/:id/edit' do
+  get '/companies/:id/edit' do #get edit form if logged in
     @company = Company.find_by(id: params[:id])
     if logged_in? && @company.user_id == session[:user_id]
       erb :'companies/edit_company'
     else
-      flash[:edit_error] = "You cannot edit a company you didn't create" 	
+      edit_warning 	
       redirect to "/companies"
     end
   end
 
-  patch '/companies/:id' do
+  patch '/companies/:id' do #patch/post changes in company
     company = Company.find_by(id: params[:id])
     if !params[:name].empty?
       company.update(name: params[:name], shipping_container_notes: params[:shipping_container_notes], label_notes: params[:label_notes], asn_notes: params[:asn_notes], routing_notes: params[:routing_notes])
