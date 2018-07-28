@@ -1,15 +1,9 @@
 module Slugger
 
 
-  module InstanceMethods
-    def slug
-      self.username.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
-    end
-  end
-
   module ClassMethods
-    def self.find_by_slug(slug)
-      self.all.find{|user| user.slug == slug}
+    def find_by_slug(slug)
+      self.all.find{|value| value.slug == slug}
     end
   end
 

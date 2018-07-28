@@ -31,8 +31,8 @@ class CompaniesController < ApplicationController
     end
   end
 
-  get '/companies/:id' do  #go to indv company page if logged in
-    @company = Company.find_by(id: params[:id]) 
+  get '/companies/:company_slug' do  #go to indv company page if logged in
+    @company = Company.find_by_slug(params[:company_slug]) 
     if logged_in?
        erb :'/companies/show_company'
     else
@@ -46,8 +46,8 @@ class CompaniesController < ApplicationController
     redirect to "/companies"
   end
 
-  get '/companies/:id/edit' do #get edit form if logged in
-    @company = Company.find_by(id: params[:id])
+  get '/companies/:company_slug/edit' do #get edit form if logged in
+    @company = Company.find_by_slug(params[:company_slug])
     if logged_in? && @company.user_id == session[:user_id]
       erb :'companies/edit_company'
     else

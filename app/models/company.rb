@@ -7,7 +7,10 @@ class Company < ActiveRecord::Base
 	belongs_to :user
 	has_many :comments
     
-    include Slugger::InstanceMethods
     extend Slugger::ClassMethods
+
+    def slug
+      self.name.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+    end
 	
 end

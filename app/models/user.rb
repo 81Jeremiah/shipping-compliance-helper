@@ -8,8 +8,12 @@ class User < ActiveRecord::Base
 
 	has_secure_password
 
-  include Slugger::InstanceMethods
   extend Slugger::ClassMethods
+
+    def slug
+      self.username.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '') 
+    end
+
 
     
 end

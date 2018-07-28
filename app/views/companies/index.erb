@@ -1,11 +1,10 @@
 <H1>Please see below for all of the companies:</H1>
 <% @companies.each.with_index(1) do |company, i| %>
-  <p><a href="companies/<%= company.id %>"> <%= i %>.<%= company.name %></a></p>
+  <p><a href="companies/<%= company.slug %>"> <%= i %>.<%= company.name %></a></p>
  <% end %>
  
  <h3> Don't see a company and wish to contribute? Please click <a href="/companies/new">here</a></h3>
 
-<!-- p><a href="/logout">Logout</a> -->
 <button class= "btn">
 	<a href="/logout" >Logout</a>
 </button>
