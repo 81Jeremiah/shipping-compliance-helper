@@ -5,7 +5,7 @@
 <p><b>Routing Notes:</b> <%= @company.routing_notes %></p>
 
 <% if @company.user_id == session[:user_id] %>
-	<button class="btn"> <a href="/companies/<%= @company.id %>/edit">Edit Company</a></button>
+	<button class="btn"> <a href="/companies/<%= @company.slug %>/edit">Edit Company</a></button>
 
 	
 	  <form action="/companies/<%= @company.id %>/delete" method="POST">
@@ -17,12 +17,13 @@
 
 <% end %>
 	
+<% if current_user.id != @company.user_id %>
 	<form action="/comments/<%= @company.id %>" method="POST">
 		<label for="user_comment">Got something to add?</label><br>
 		<textarea id="user_comment" name="user_comment" rows="4" cols="50" required></textarea>
 		<input type="submit" value="submit">
     </form>
-
+<% end %>
 
 <h2>COMMENTS</h2>
 <% @company.comments.each do |comment| %>
