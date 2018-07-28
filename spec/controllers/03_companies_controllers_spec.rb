@@ -165,7 +165,7 @@ describe CompaniesController do
         fill_in(:password, :with => "nukethewales")
         click_button 'login'
 
-        visit "/companies/#{company.id}"
+        visit "/companies/#{company.slug}"
         expect(page.status_code).to eq(200)
         expect(page.body).to include("Delete Company")
         expect(page.body).to include(company.name)
@@ -195,7 +195,7 @@ describe CompaniesController do
         fill_in(:username, :with => "nelsonmuntz")
         fill_in(:password, :with => "nukethewales")
         click_button 'login'
-        visit "/companies/#{company.id}/edit"
+        visit "/companies/#{company.slug}/edit"
         expect(page.status_code).to eq(200)
         expect(page.body).to include(company.name)
       end
@@ -212,7 +212,7 @@ describe CompaniesController do
         fill_in(:username, :with => "nelsonmuntz")
         fill_in(:password, :with => "nukethewales")
         click_button 'login'
-        visit "/companies/#{company2.id}/edit"
+        visit "/companies/#{company2.slug}/edit"
         expect(page.current_path).to include('/companies')
         expect(page).to have_content("You cannot edit a company you didn't create")
       end
@@ -225,7 +225,7 @@ describe CompaniesController do
         fill_in(:username, :with => "nelsonmuntz")
         fill_in(:password, :with => "nukethewales")
         click_button 'login'
-        visit "/companies/#{company.id}/edit"
+        visit "/companies/#{company.slug}/edit"
 
         fill_in(:name, :with => "Bed Bath & Beyond")
 
@@ -243,14 +243,12 @@ describe CompaniesController do
         fill_in(:username, :with => "nelsonmuntz")
         fill_in(:password, :with => "nukethewales")
         click_button 'login'
-        visit "/companies/#{company.id}/edit"
+        visit "/companies/#{company.slug}/edit"
 
         fill_in(:name, :with => "")
 
         click_button 'submit'
-        #expect(Company.find_by(:name => "Bed Bath")).to be(nil)
-        expect(page.current_path).to eq("/companies/#{company.id}/edit")
-        #expect(page).to have_content("Please enter a name")
+        expect(page.current_path).to eq("/companies/#{company.slug}/edit")
       end
     end
 
@@ -272,7 +270,7 @@ describe CompaniesController do
         fill_in(:username, :with => "nelsonmuntz")
         fill_in(:password, :with => "nukethewales")
         click_button 'login'
-        visit "companies/#{company.id}"
+        visit "companies/#{company.slug}"
         click_button "Delete Company"
         expect(page.status_code).to eq(200)
         expect(Company.find_by(:name => "Bed Bath")).to eq(nil)

@@ -20,11 +20,10 @@ class CompaniesController < ApplicationController
 	  end
   end
 
-  post '/companies/:userslug' do #post company to belong to user that is logged in
-    
-    @company = Company.create(name: params[:name], shipping_container_notes: params[:shipping_container_notes], label_notes: params[:label_notes], asn_notes: params[:asn_notes], routing_notes: params[:routing_notes], user_id: current_user.id )
+  post '/companies/:userslug' do #post company to belong to user that is logged in 
+    @company = Company.new(name: params[:name], shipping_container_notes: params[:shipping_container_notes], label_notes: params[:label_notes], asn_notes: params[:asn_notes], routing_notes: params[:routing_notes], user_id: current_user.id )
     if @company.save
-      redirect to "/companies/#{@company.id}"      
+      redirect to "/companies/#{@company.slug}"      
     else
       company_name_warning
       redirect to "/companies/new"
@@ -60,9 +59,9 @@ class CompaniesController < ApplicationController
     company = Company.find_by(id: params[:id])
     if !params[:name].empty?
       company.update(name: params[:name], shipping_container_notes: params[:shipping_container_notes], label_notes: params[:label_notes], asn_notes: params[:asn_notes], routing_notes: params[:routing_notes])
-      redirect to "/companies/#{company.id}"
+      redirect to "/companies/#{company.slug}"
     else
-      redirect to "/companies/#{company.id}/edit"
+      redirect to "/companies/#{company.slug}/edit"
     end
   end
 

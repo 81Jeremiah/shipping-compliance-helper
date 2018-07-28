@@ -1,10 +1,6 @@
 require 'spec_helper'
 require 'pry'
 
-# def app
-#   ApplicationController
-# end
-
 describe UsersController do
 	
   describe "Signup Page" do
@@ -40,7 +36,6 @@ describe UsersController do
       fill_in "email", with: ""
       fill_in "password", with: "nukethewales"
       click_on "submit"
-      #expect(page).to have_content("Please fill out this field.")
 
       params = {
         :username => "nelsonmuntz",
