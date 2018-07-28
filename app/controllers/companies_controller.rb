@@ -41,12 +41,13 @@ class CompaniesController < ApplicationController
   end
 
   delete '/companies/:id/delete' do #delete company
-    if logged_in && current_user.id == session[:user_id]
-      company = Company.find_by(id: params[:id])
+    company = Company.find_by(id: params[:id])
+    if logged_in? && current_user.id == company.user_id
       company.delete
       redirect to "/companies"
     else
       redirect to "/companies"
+    end
   end
 
   get '/companies/:id/edit' do #get edit form if logged in
