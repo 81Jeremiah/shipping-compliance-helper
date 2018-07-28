@@ -1,8 +1,8 @@
 <h1><%= @company.name %> </h1>
-<p>Shipping Container Notes: <%= @company.shipping_container_notes %></p>
-<p>Label Notes: <%= @company.label_notes %></p>
-<p>ASN Notes: <%= @company.asn_notes %></p>
-<p>Routing Notes: <%= @company.routing_notes %></p>
+<p><b>Shipping Container Notes:</b> <%= @company.shipping_container_notes %><p>
+<p><b>Label Notes:</b> <%= @company.label_notes %></p>
+<p><b>ASN Notes: </b><%= @company.asn_notes %></p>
+<p><b>Routing Notes:</b> <%= @company.routing_notes %></p>
 
 <% if @company.user_id == session[:user_id] %>
 	<button class="btn"> <a href="/companies/<%= @company.id %>/edit">Edit Company</a></button>
