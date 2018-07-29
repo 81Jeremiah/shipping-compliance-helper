@@ -4,9 +4,9 @@ class UsersController < ApplicationController
 
 
   post '/login' do
-  	@user = User.find_by(username: params[:username])
-    if @user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
+  	user = User.find_by(username: params[:username]) #find user by username
+    if user && user.authenticate(params[:password]) #authenticate password with username
+      session[:user_id] = user.id
   	  redirect to "/companies"
     else
       flash[:wrong_password] = "Username or password is not correct.<br> Please try again or create an account"
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     end
   end
 
-  get '/signup' do
+  get '/signup' do #get signup page if not logged in
     if !logged_in?
      erb :'users/signup'
     else
@@ -22,28 +22,31 @@ class UsersController < ApplicationController
     end
   end
 
-  post "/signup" do
-  	@user = User.create(params)
+  post "/signup" do #create new user if name and email are unique
+   @user = User.new(params)
   	if @user.save 
     	session[:user_id] = @user.id
       redirect to "/companies"
-    elsif User.all.any?{|user|user.username == params[:username]}
-      flash[:username_warning] = "Sorry that username is already taken"
-      redirect to "/signup"
-    elsif User.all.any?{|user|user.email == params[:email]}
-      flash[:username_warning] = "That email already has an account, did you mean to login?"
-      redirect to "/signup"
+
+    elsif @user.errors
+     flash[:message] = @user.errors.messages.values.flatten.to_sentence
+       redirect to "/signup"
+    
     else
       redirect to "/signup"
     end
   end
 
-  get '/users/:slug' do
-    @user = User.find_by_slug(slug: params[:slug])
-    erb :'user/show'
+  get '/users/:slug' do #go to user show page
+    @user = User.find_by_slug(params[:slug])
+    if @user.id == current_user.id
+      erb :'users/show'
+    else
+      redirect to "/companies"
+    end
   end
 
-  get '/logout' do
+  get '/logout' do #logout and end session
     if !logged_in?
       redirect to "/"
     else
