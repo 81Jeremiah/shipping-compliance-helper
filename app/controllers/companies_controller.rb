@@ -21,11 +21,11 @@ class CompaniesController < ApplicationController
   end
 
   post '/companies/:userslug' do #post company to belong to user that is logged in 
-    @company = Company.new(name: params[:name], shipping_container_notes: params[:shipping_container_notes], label_notes: params[:label_notes], asn_notes: params[:asn_notes], routing_notes: params[:routing_notes], user_id: current_user.id )
-    if @company.save
-      redirect to "/companies/#{@company.slug}"      
+    company = Company.create(name: params[:name], shipping_container_notes: params[:shipping_container_notes], label_notes: params[:label_notes], asn_notes: params[:asn_notes], routing_notes: params[:routing_notes], user_id: current_user.id )
+    if company.save
+      redirect to "/companies/#{company.slug}"      
     else
-      company_name_warning
+       flash[:need_name] = company.errors[:name].to_sentence
       redirect to "/companies/new"
     end
   end
@@ -50,7 +50,7 @@ class CompaniesController < ApplicationController
     if logged_in? && @company.user_id == session[:user_id]
       erb :'companies/edit_company'
     else
-      edit_warning 	
+      flash[:edit_error] = "You cannot edit a company you didn't create" 
       redirect to "/companies"
     end
   end
