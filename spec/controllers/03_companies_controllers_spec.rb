@@ -138,7 +138,7 @@ describe CompaniesController do
 
         expect(Company.find_by(:name => "")).to eq(nil)
         expect(page.current_path).to eq("/companies/new")
-        expect(page).to have_content("A company must have a name and can't already be in the database.")
+        
       end
     end
 

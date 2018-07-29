@@ -74,7 +74,7 @@ describe UsersController do
       fill_in "email", with: "haha@juno.com"
       fill_in "password", with: "nukethewales"
       click_on "submit"
-      expect(page).to have_content("Sorry that username is already taken")
+      expect(page).to have_content("Sorry, that username is already taken")
 
       params = {
         :username => "nelsonmuntz",

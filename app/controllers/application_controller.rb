@@ -35,15 +35,6 @@ class ApplicationController < Sinatra::Base
       flash[:not_logged_in] = "You must login to view that page."
     end
 
-    def company_name_warning
-      flash[:need_name] = "A company must have a name and can't already be in the database."
-    end  
-
-    def edit_warning
-      flash[:edit_error] = "You cannot edit a company you didn't create"  
-    end  
-
-
 
   end
 
