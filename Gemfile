@@ -9,7 +9,8 @@ gem 'require_all'
 gem 'thin'
 gem 'bcrypt'
 gem 'sinatra-flash'
-#gem 'heroku' 
+gem 'rails_12factor'
+gem 'foreman'
 
 group :development do
   gem 'sqlite3'
