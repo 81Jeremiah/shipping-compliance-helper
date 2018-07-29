@@ -12,7 +12,7 @@ INSTALL INSTRUCTIONS
 
 USAGE 
 
- I will temporarily have this hosted at when I can get it to a permanent home I will update the link. Please add companies, give comments and help build the data base.
+ This will be temporarliy hosted at. When I can get it to a permanent home I will update the link. Please add companies, give comments and help build the data base.
 
 LICENSE
 
