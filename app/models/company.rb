@@ -2,7 +2,8 @@ require_all 'app'
 
 class Company < ActiveRecord::Base
 	validates_presence_of :name
-	validates :name, uniqueness: true
+	validates :name, uniqueness: { message: "A company must have a name and can't already be in the database." }
+
 
 	belongs_to :user
 	has_many :comments
