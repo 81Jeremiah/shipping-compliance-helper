@@ -4,3 +4,10 @@
   <label for="user_comment"></label>
   <textarea name="user_comment" id="content" rows="4" cols="50" required ><%= @comment.user_comment %></textarea>
   <input type="submit" value="submit">
+</form>
+  <form action="/comments/<%= @comment.id %>/delete" method="POST">
+	 <input id="hidden" type="hidden" name="_method" value="DELETE">
+     <input type="submit" value="Delete Comment">
+   </form>
+
+
