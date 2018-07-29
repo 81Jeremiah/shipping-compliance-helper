@@ -9,7 +9,7 @@ gem 'require_all'
 gem 'thin'
 gem 'bcrypt'
 gem 'sinatra-flash'
-gem 'heroku' 
+#gem 'heroku' 
 
 group :development do
   gem 'sqlite3'
